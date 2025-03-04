@@ -14,8 +14,10 @@ const routes = [
         component: OtherModuleView,
         beforeEnter: (to, from, next) => {
             const token = localStorage.getItem('token');
-
-            if (!token) {   // validate rol for example
+            /* 
+                * validate rol for example 
+            */
+            if (!token) {
                 next({ name: 'Home' });
             } else {
                 next();
