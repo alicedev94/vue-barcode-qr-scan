@@ -40,6 +40,7 @@ const onError = (err) => {
 
 watch(barcodeResult, (newVal) => {
   if (newVal) {
+    localStorage.setItem('token', newVal);
     router.push({ name: 'OtherModule', params: { id: newVal } });
   }
 });

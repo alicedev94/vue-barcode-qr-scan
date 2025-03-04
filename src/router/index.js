@@ -11,7 +11,15 @@ const routes = [
     {
         path: '/module/:id',
         name: 'OtherModule',
-        component: OtherModuleView
+        component: OtherModuleView,
+        beforeEnter: (to, from, next) => {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                next({ name: 'Home' });
+            } else {
+                next();
+            }
+        }
     }
 ]
 
