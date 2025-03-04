@@ -22,13 +22,14 @@
 
 <script setup>
 import { StreamBarcodeReader } from 'vue-barcode-reader';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
+import { useRouter } from 'vue-router';
 
 const barcodeResult = ref(null);
 const error = ref(null);
+const router = useRouter();
 
 const onDecode = (result) => {
-  console.log('Código de barras detectado:', result);
   barcodeResult.value = result;
 };
 
@@ -36,6 +37,12 @@ const onError = (err) => {
   console.error('Error al escanear:', err);
   error.value = err.message;
 };
+
+watch(barcodeResult, (newVal) => {
+  if (newVal) {
+    router.push({ name: 'OtherModule', params: { id: newVal } });
+  }
+});
 </script>
 
 <style scoped>

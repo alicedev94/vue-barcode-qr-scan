@@ -9,7 +9,7 @@ const routes = [
         component: Home
     },
     {
-        path: '/other-module',
+        path: '/module/:id',
         name: 'OtherModule',
         component: OtherModuleView
     }
