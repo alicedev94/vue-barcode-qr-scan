@@ -14,13 +14,17 @@ const routes = [
         component: OtherModuleView,
         beforeEnter: (to, from, next) => {
             const token = localStorage.getItem('token');
-            /* 
-                * validate rol for example 
-            */
+
             if (!token) {
                 next({ name: 'Home' });
-            } else {
+                return;
+            }
+
+            // Validar rol de administrador
+            if (token === 'admin') {
                 next();
+            } else {
+                next({ name: 'Home' });
             }
         }
     }
