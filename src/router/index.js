@@ -24,6 +24,7 @@ const routes = [
             if (token === 'admin') {
                 next();
             } else {
+                alert('No tienes permisos para acceder a este módulo');
                 next({ name: 'Home' });
             }
         }

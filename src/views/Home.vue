@@ -31,7 +31,7 @@
   </div>
 
   <button @click="clearLocalStorage">
-    Limpiar Local Storage
+    Limpiar datos
   </button>
 </template>
 
