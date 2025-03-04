@@ -1,85 +1,63 @@
 <template>
     <div class="module-container">
-        <h1 class="module-title">Other Module View</h1>
-        <div class="module-content">
-            <div class="card">
-                <h2>Bienvenido</h2>
-                <p>Este es un módulo con diseño responsivo</p>
-            </div>
+        <h2>Módulo {{ $route.params.id }}</h2>
+        <div class="content">
+            <input 
+                type="text" 
+                class="module-input"
+                placeholder="Ingrese datos del módulo"
+            />
+            <button class="action-button">
+                Procesar
+            </button>
         </div>
     </div>
 </template>
 
 <style scoped>
 .module-container {
-    padding: 20px;
-    max-width: 1200px;
+    padding: 2rem;
+    max-width: 800px;
     margin: 0 auto;
 }
 
-.module-title {
-    color: #2c3e50;
-    text-align: center;
-    margin-bottom: 2rem;
-    font-size: 2.5rem;
+.content {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
 }
 
-.module-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    padding: 1rem;
+.module-input {
+    padding: 0.5rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    width: 100%;
+    transition: all 0.2s;
 }
 
-.card {
-    background: #ffffff;
-    border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+.module-input:focus {
+    outline: none;
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
 }
 
-.card:hover {
-    transform: translateY(-5px);
+.action-button {
+    padding: 0.5rem 1.5rem;
+    background-color: #10b981;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
 }
 
-.card h2 {
-    color: #2c3e50;
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
+.action-button:hover {
+    background-color: #059669;
 }
 
-.card p {
-    color: #666;
-    line-height: 1.6;
-}
-
-/* Estilos responsivos */
-@media (max-width: 768px) {
-    .module-title {
-        font-size: 2rem;
-    }
-
-    .module-container {
-        padding: 15px;
-    }
-
-    .card {
-        padding: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .module-title {
-        font-size: 1.75rem;
-    }
-
-    .module-content {
-        grid-template-columns: 1fr;
-    }
-
-    .card h2 {
-        font-size: 1.25rem;
-    }
+.action-button:active {
+    transform: scale(0.98);
 }
 </style>

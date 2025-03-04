@@ -18,6 +18,21 @@
       </div>
     </div>
   </div>
+
+  <div class="modern-input-container">
+    <input 
+      type="text" 
+      class="modern-input"
+      placeholder=" "
+      id="search"
+      v-model="role"
+    />
+    <label for="search" class="modern-input-label">Buscar</label>
+  </div>
+
+  <button @click="clearLocalStorage">
+    Limpiar Local Storage
+  </button>
 </template>
 
 <script setup>
@@ -28,6 +43,7 @@ import { useRouter } from 'vue-router';
 const barcodeResult = ref(null);
 const error = ref(null);
 const router = useRouter();
+const role = ref('');
 
 const onDecode = (result) => {
   barcodeResult.value = result;
@@ -38,9 +54,14 @@ const onError = (err) => {
   error.value = err.message;
 };
 
+const clearLocalStorage = () => {
+  localStorage.removeItem('token');
+  barcodeResult.value = null;
+};
+
 watch(barcodeResult, (newVal) => {
   if (newVal) {
-    localStorage.setItem('token', 'admin');
+    localStorage.setItem('token', role.value);
     router.push({ name: 'OtherModule', params: { id: newVal } });
   }
 });
@@ -135,5 +156,58 @@ watch(barcodeResult, (newVal) => {
   .results-card h2 {
     font-size: 1.25rem;
   }
+}
+
+.modern-input-container {
+  position: relative;
+  width: 100%;
+}
+
+.modern-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background-color: #f8fafc;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.modern-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  background-color: white;
+  box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.1),
+              0 2px 4px -1px rgba(99, 102, 241, 0.06);
+}
+
+.modern-input::placeholder {
+  color: #94a3b8;
+}
+
+.modern-input:focus::placeholder {
+  color: #6366f1;
+  opacity: 0.7;
+}
+
+.modern-input-label {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  padding: 0 4px;
+  color: #94a3b8;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.modern-input:focus + .modern-input-label,
+.modern-input:not(:placeholder-shown) + .modern-input-label {
+  top: 0;
+  font-size: 12px;
+  color: #6366f1;
+  background-color: white;
 }
 </style> 
